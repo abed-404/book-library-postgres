@@ -1,4 +1,4 @@
-const dbConnection = require('../../connection');
+const dbConnection = require('../../config/connection');
 
 const query = `UPDATE books 
                 SET isDeleted = true 

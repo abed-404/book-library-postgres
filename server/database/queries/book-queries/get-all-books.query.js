@@ -1,4 +1,4 @@
-const dbConnection = require('../../connection');
+const dbConnection = require('../../config/connection');
 
 const query = `SELECT id, title, author, edition, img 
                 FROM books 

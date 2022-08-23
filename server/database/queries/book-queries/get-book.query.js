@@ -1,4 +1,4 @@
-const dbConnection = require('../../connection');
+const dbConnection = require('../../config/connection');
 
 const query = `SELECT * FROM books 
                 WHERE id = $1 AND isDeleted = false;`;
