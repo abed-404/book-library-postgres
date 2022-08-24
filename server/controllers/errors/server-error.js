@@ -6,7 +6,6 @@ const CostumError = (message, status) => {
 };
 
 const errorHandler = (err, req, res, next) => {
-  //   if (err.code === 'ENOENT') return res.status(500).send(err.message);
   if (err.status === 400) return res.status(err.status).send(err.message);
   if (err.status === 404) return res.status(err.status).send(err.message);
   return res.status(500).send(err.message);

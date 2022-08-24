@@ -1,8 +1,8 @@
-const { getData } = require('../../database/queries');
+const { getBooks } = require('../../database/queries');
 
 module.exports = async (req, res, next) => {
   try {
-    const books = (await getData()).rows;
+    const books = (await getBooks()).rows;
     return res.json(books);
   } catch (err) {
     return next(err);

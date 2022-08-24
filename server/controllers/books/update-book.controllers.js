@@ -1,31 +1,31 @@
 /* eslint-disable prefer-const */
 const { validateBook } = require('../../util');
 const { CostumError } = require('../errors/server-error');
-const { updateBook, getBook } = require('../../database/queries');
+const { updateBookById, getBookById } = require('../../database/queries');
 
 module.exports = async (req, res, next) => {
   try {
     const id = parseInt(req.params.id, 10);
     await validateBook(req.body, req.method);
-    const oldData = (await getBook(id)).rows[0];
-    if (!oldData) {
+    const bookOldData = (await getBookById(id)).rows[0];
+    if (!bookOldData) {
       throw CostumError(`user with id: ${id} can not been found`, 404);
     }
     let title; let author; let edition; let
       image;
     ({
-      title = oldData.title, author = oldData.author, edition = oldData.edition,
-      image = oldData.img,
+      title = bookOldData.title, author = bookOldData.author, edition = bookOldData.edition,
+      image = bookOldData.img,
     } = req.body);
-    const newData = {
+    const bookNewData = {
       title, author, edition, image,
     };
-    await updateBook(id, newData);
+    await updateBookById(id, bookNewData);
     return res
       .status(200)
       .json({
         massage: `user with id:${id} has been updated successfully`,
-        updated_book: newData,
+        updated_book: bookNewData,
       });
   } catch (err) {
     return next(err);
